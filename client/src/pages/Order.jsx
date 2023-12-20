@@ -20,7 +20,7 @@ const Order = () => {
     totalprice:totalPrice
   }
   const order = async()=>{
-    const fetcher = await fetch('http://localhost:5750/api/order',{
+    const fetcher = await fetch('https://jazzy-mern.onrender.com/api/order',{
         method:"POST",
         headers:{
             "Content-type": "application/json",
