@@ -14,6 +14,6 @@ router.get('/isloggedin',isLoggedIn);
 // forgot password route
 router.post('/forgotpassword', forgotPassword);
 // reset password route
-router.put('/resetpassword/:resetToken',resetPassword)
+router.put('/resetpassword/:resetToken',resetPassword) 
 
 module.exports = router;

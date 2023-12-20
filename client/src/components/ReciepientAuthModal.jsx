@@ -8,47 +8,51 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 
 function MyVerticallyCenteredModal(props) {
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [verifypassword, setVerifyPassword] = useState("");
-  const [phonenumber, setPhoneNumber] = useState("");
 
-  const handlSignUp = async (e) => {
-    e.preventDefault();
-    const signUpData = {
-      firstname,
-      lastname,
-      email,
-      phonenumber,
-      password,
-      verifypassword,
-    };
-    try {
-      const data = await fetch("http://localhost:5750/api/user/registration", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(signUpData),
-      });
-      const res = await data.json();
-      console.log(res);
-      if (res.success === false || res.name === "ValidationError") {
-        toast.error(res.message);
-      }
-      if (res.success === true) {
-        toast.success(res.message);
-        navigate("/LogIn");
-      }
-      // if(res.name === "ValidationError"){
-      //   toast.error(res.message)
-      // }
-    } catch (error) {
-      toast.error;
+//   ============================================================
+const [recipient,setRecipient] = useState({
+    firstname:'',
+    lastname:'',
+    email:'',
+    phonenumber:''
+  })
+  const [error,setError] = useState(false)
+
+  function handleChange(e){
+    const value = e.target.value;
+    setRecipient({
+        ...recipient,
+      [e.target.name]: value
+    });
+   
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if(!recipient.firstname || !recipient.lastname || !recipient.email || !recipient.phonenumber){
+        toast.error('all fields must be filled')
+        setError('all fields must be submitted')
+        return
     }
-  };
+    if(recipient.phonenumber.length < 10){
+        toast.error('phone min lenght must be atleast 10')
+        return
+
+    }
+    if(recipient.firstname && recipient.lastname && recipient.email && recipient.phonenumber && recipient.phonenumber.length > 10){
+
+      setRecipient({firstname:'',lastname:'',email:"",phonenumber:''})
+      localStorage.setItem('recipient', JSON.stringify(recipient))
+      console.log(recipient);
+      toast.success('Reciepient added successfully')
+    }
+    try {
+        
+    } catch (error) {
+        
+    }
+
+  }
   return (
     <Modal
       {...props}
@@ -66,76 +70,18 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form className="w-75 m-auto" >
-            {/* first name */}
-          <Form.Label className=" fs-6 text-secondary">First Name</Form.Label>
-
-          <FloatingLabel
-            controlId="floatingInput"
-            label="First Name"
-            className="mb-3"
-          >
-            <Form.Control
-              type="text"
-              placeholder="First Name"
-              className="border border-3 rounded"
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </FloatingLabel>
-          {/* last name */}
-          <Form.Label className=" fs-6 text-secondary">Last Name </Form.Label>
-
-          <FloatingLabel
-            controlId="floatingPassword"
-            label="Last Name "
-            className="mb-3"
-          >
-            <Form.Control
-              type="text"
-              placeholder="Last Name"
-              className="border border-3 rounded"
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </FloatingLabel>
-          {/* EMAIL */}
-          <Form.Label className=" fs-6 text-secondary">Email </Form.Label>
-
-          <FloatingLabel
-            controlId="floatingInput"
-            label="example@mail.com"
-            className="mb-3"
-          >
-            <Form.Control
-              type="email"
-              placeholder="name@example.com"
-              className="border border-3 rounded"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </FloatingLabel>
-          {/* Phone number */}
-          <Form.Label className=" fs-6 text-secondary">Phone Number</Form.Label>
-
-          <InputGroup className="mb-3" size="lg">
-            <InputGroup.Text id="basic-addon1" className="bg-secondary fw-bold">
-              +234
-            </InputGroup.Text>
-            <Form.Control
-              placeholder=""
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              value={phonenumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-          </InputGroup>
-
-          <button className="btn btn-danger w-100 fs-5">Submit</button>
-        </Form>
+      <form>
+        <input type="text" name="firstname" placeholder="first name" value={recipient.firstname} onChange={handleChange} />
+        <input type="text" name="lastname" placeholder="last name" value={recipient.lastname} onChange={handleChange} />
+        <input type="email" name="email" placeholder="email" value={recipient.email} onChange={handleChange} />
+        <input type="number" name="phonenumber" placeholder="phone" value={recipient.phonenumber} onChange={handleChange}/><br /><br />
+        <button onClick={handleSubmit} className="btn btn-primary">
+          submit
+        </button>
+      </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        {/* <Button onClick={props.onHide}>Close</Button> */}
       </Modal.Footer>
     </Modal>
   );
