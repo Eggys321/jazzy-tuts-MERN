@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import { Toaster } from 'react-hot-toast';
 import CheckOut from "./pages/CheckOut";
 import ResetPassword from "./pages/ResetPassword";
+import Order from "./pages/Order";
 
 // const NavBar = lazy(() => import('./layouts/NavBar'))
 const NavBar= lazy(()=>{
@@ -43,6 +44,7 @@ function App() {
             <Route element={<NavBar />}>
               <Route path="/" element={<Home />} />
               <Route path="/CheckOut" element={<CheckOut/>}/>
+              <Route path="/Order" element={<Order/>}/>
             </Route>
             <Route path="/LogIn" element={<LogIn/>} />
             <Route path="/SignUp" element={<SignUp/>}/>

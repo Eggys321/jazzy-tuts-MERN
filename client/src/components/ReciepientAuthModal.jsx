@@ -35,11 +35,16 @@ const [recipient,setRecipient] = useState({
         return
     }
     if(recipient.phonenumber.length < 10){
-        toast.error('phone min lenght must be atleast 10')
+        toast.error('phone min lenght must be atleast 10 and you typed ' + recipient.phonenumber.length + ' chrs which is less than required')
         return
 
     }
-    if(recipient.firstname && recipient.lastname && recipient.email && recipient.phonenumber && recipient.phonenumber.length > 10){
+    if(!recipient.email.includes("@") || !recipient.email.includes(".") || !recipient.email.includes("com") ){
+      toast.error('invalid email address')
+      return
+
+  }
+    if(recipient.firstname && recipient.lastname && recipient.email && recipient.phonenumber && recipient.phonenumber.length >= 10){
 
       setRecipient({firstname:'',lastname:'',email:"",phonenumber:''})
       localStorage.setItem('recipient', JSON.stringify(recipient))
@@ -73,7 +78,7 @@ const [recipient,setRecipient] = useState({
       <form>
         <input type="text" name="firstname" placeholder="first name" value={recipient.firstname} onChange={handleChange} />
         <input type="text" name="lastname" placeholder="last name" value={recipient.lastname} onChange={handleChange} />
-        <input type="email" name="email" placeholder="email" value={recipient.email} onChange={handleChange} />
+        <input type="email" required name="email" placeholder="email" value={recipient.email} onChange={handleChange} />
         <input type="number" name="phonenumber" placeholder="phone" value={recipient.phonenumber} onChange={handleChange}/><br /><br />
         <button onClick={handleSubmit} className="btn btn-primary">
           submit

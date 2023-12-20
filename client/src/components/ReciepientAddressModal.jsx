@@ -8,48 +8,50 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 
 function ReciepientAddressModal(props) {
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [verifypassword, setVerifyPassword] = useState("");
-  const [phonenumber, setPhoneNumber] = useState("");
+  const [address,setAddress] = useState({
+    city:'',
+    housenumber:'',
+    street:''
+  })
+ 
+  function handleChange(e){
+    const value = e.target.value;
+    setAddress({
+        ...address,
+      [e.target.name]: value
+    });
+   
+  }
 
-  const handlSignUp = async (e) => {
-    e.preventDefault();
-    const signUpData = {
-      firstname,
-      lastname,
-      email,
-      phonenumber,
-      password,
-      verifypassword,
-    };
-    try {
-      const data = await fetch("http://localhost:5750/api/user/registration", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(signUpData),
-      });
-      const res = await data.json();
-      console.log(res);
-      if (res.success === false || res.name === "ValidationError") {
-        toast.error(res.message);
-      }
-      if (res.success === true) {
-        toast.success(res.message);
-        navigate("/LogIn");
-      }
-      // if(res.name === "ValidationError"){
-      //   toast.error(res.message)
-      // }
-    } catch (error) {
-      toast.error;
+  
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if(!address.city || !address.housenumber || !address.street){
+        toast.error('all fields must be filled')
+        // setError('all fields must be submitted')
+        return
     }
-  };
-  return (
+    if(address.street.length > 15){
+        toast.error('street min lenght must be atleast 15 and you typed ' + address.street.length + ' chrs which is less than required')
+        return
+
+    }
+    if(address.city && address.housenumber && address.street && address.street.length <= 15){
+
+      setAddress({city:'',housenumber:'',street:""})
+      localStorage.setItem('address', JSON.stringify(address))
+      console.log(address);
+      toast.success('address added successfully')
+    }
+    try {
+        
+    } catch (error) {
+        
+    }
+
+  }
+
+    return (
     <Modal
       {...props}
       size="lg"
@@ -67,7 +69,15 @@ function ReciepientAddressModal(props) {
       </Modal.Header>
       <Modal.Body>
         
-        
+      <form>
+        <input type="text" name="city" placeholder="city" value={address.city} onChange={handleChange} />
+        <input type="text" name="housenumber" placeholder="house number" value={address.housenumber} onChange={handleChange} />
+        <input type="text" name="street" placeholder="street" value={address.street} onChange={handleChange} />
+       <br /><br />
+        <button onClick={handleSubmit} className="btn btn-primary">
+          submit
+        </button>
+      </form>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

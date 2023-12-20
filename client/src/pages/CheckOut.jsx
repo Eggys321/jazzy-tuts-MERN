@@ -6,6 +6,7 @@ import CartContext from "../context/CartContext";
 import binPic from "../assets/bin-img.svg";
 import MyVerticallyCenteredModal from "../components/ReciepientAuthModal.jsx";
 import ReciepientAddressModal from "../components/ReciepientAddressModal.jsx";
+import { Link } from "react-router-dom";
 
 const CheckOut = () => {
   const [show, setShow] = useState(false);
@@ -53,7 +54,7 @@ const CheckOut = () => {
             onHide={() => setModalAddress(false)}
             />
             <hr />
-            <button className="btn btn-success w-100">Place Your Order</button>
+            <Link className="btn btn-success w-100 text-decoration-none" to='/Order'> Place Your Order </Link>
           </div>
         </section>
         <section className="col-lg-5 border border-3 rounded p-4">
