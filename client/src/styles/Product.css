@@ -1,0 +1,27 @@
+.card-inner{
+    width: 19rem;
+}
+
+/* .card-hover:hover{
+    transform: scale(1.1);
+} */
+
+
+@media(max-width:425px){
+    .card-inner{
+        width: 100%;
+    }
+
+}
+@media(max-width:768px){
+    .card-inner{
+        width: 100%;
+    }
+
+}
+/* @media(max-width:1280px){
+    .card-inner{
+        width: 23rem;
+    }
+
+} */
