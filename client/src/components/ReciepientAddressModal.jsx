@@ -66,73 +66,8 @@ function ReciepientAddressModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form className="w-75 m-auto" >
-            {/* first name */}
-          <Form.Label className=" fs-6 text-secondary">Select State</Form.Label>
-
-          <FloatingLabel
-            controlId="floatingInput"
-            label="First Name"
-            className="mb-3"
-          >
-            <Form.Control
-              type="text"
-              placeholder="First Name"
-              className="border border-3 rounded"
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </FloatingLabel>
-          {/* last name */}
-          <Form.Label className=" fs-6 text-secondary">House number </Form.Label>
-
-          <FloatingLabel
-            controlId="floatingPassword"
-            label="Last Name "
-            className="mb-3"
-          >
-            <Form.Control
-              type="text"
-              placeholder="Last Name"
-              className="border border-3 rounded"
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </FloatingLabel>
-          {/* EMAIL */}
-          <Form.Label className=" fs-6 text-secondary">Street </Form.Label>
-
-          <FloatingLabel
-            controlId="floatingInput"
-            label="example@mail.com"
-            className="mb-3"
-          >
-            <Form.Control
-              type="email"
-              placeholder="name@example.com"
-              className="border border-3 rounded"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </FloatingLabel>
-          {/* Phone number */}
-          <Form.Label className=" fs-6 text-secondary">Phone Number</Form.Label>
-
-          <InputGroup className="mb-3" size="lg">
-            <InputGroup.Text id="basic-addon1" className="bg-secondary fw-bold">
-              +234
-            </InputGroup.Text>
-            <Form.Control
-              placeholder=""
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-              value={phonenumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-          </InputGroup>
-
-          <button className="btn btn-danger w-100 fs-5">Submit</button>
-        </Form>
+        
+        
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
