@@ -66,7 +66,7 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form className="w-75 m-auto" onSubmit={handlSignUp}>
+        <Form className="w-75 m-auto" >
             {/* first name */}
           <Form.Label className=" fs-6 text-secondary">First Name</Form.Label>
 

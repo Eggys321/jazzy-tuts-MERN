@@ -5,10 +5,12 @@ import Modal from "react-bootstrap/Modal";
 import CartContext from "../context/CartContext";
 import binPic from "../assets/bin-img.svg";
 import MyVerticallyCenteredModal from "../components/ReciepientAuthModal.jsx";
+import ReciepientAddressModal from "../components/ReciepientAddressModal.jsx";
 
 const CheckOut = () => {
   const [show, setShow] = useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [modalAddress,setModalAddress] = useState(false)
   const { cart, removeItem, totalPrice, handleIncrease, handleDecrease } =
     useContext(CartContext);
   console.log(cart);
@@ -42,6 +44,14 @@ const CheckOut = () => {
           {/* Delivery Address */}
           <div>
             <h5>Delivery Address</h5>
+            <Button variant="" className="bg-dark outline-none text-light w-50" onClick={() => setModalAddress(true)}>
+            Add Delivery Address
+            </Button>
+
+            <ReciepientAddressModal
+            show={modalAddress}
+            onHide={() => setModalAddress(false)}
+            />
             <hr />
             <button className="btn btn-success w-100">Place Your Order</button>
           </div>

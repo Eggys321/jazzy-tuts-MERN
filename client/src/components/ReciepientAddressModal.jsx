@@ -7,7 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import toast from "react-hot-toast";
 import { useState } from "react";
 
-function MyVerticallyCenteredModal(props) {
+function ReciepientAddressModal(props) {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -62,13 +62,13 @@ function MyVerticallyCenteredModal(props) {
           id="contained-modal-title-vcenter"
           className="text-center w-100"
         >
-          Update Recipient
+          Add Address
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form className="w-75 m-auto" onSubmit={handlSignUp}>
+        <Form className="w-75 m-auto" >
             {/* first name */}
-          <Form.Label className=" fs-6 text-secondary">First Name</Form.Label>
+          <Form.Label className=" fs-6 text-secondary">Select State</Form.Label>
 
           <FloatingLabel
             controlId="floatingInput"
@@ -84,7 +84,7 @@ function MyVerticallyCenteredModal(props) {
             />
           </FloatingLabel>
           {/* last name */}
-          <Form.Label className=" fs-6 text-secondary">Last Name </Form.Label>
+          <Form.Label className=" fs-6 text-secondary">House number </Form.Label>
 
           <FloatingLabel
             controlId="floatingPassword"
@@ -100,7 +100,7 @@ function MyVerticallyCenteredModal(props) {
             />
           </FloatingLabel>
           {/* EMAIL */}
-          <Form.Label className=" fs-6 text-secondary">Email </Form.Label>
+          <Form.Label className=" fs-6 text-secondary">Street </Form.Label>
 
           <FloatingLabel
             controlId="floatingInput"
@@ -141,4 +141,4 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-export default MyVerticallyCenteredModal;
+export default ReciepientAddressModal;
