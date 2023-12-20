@@ -128,7 +128,7 @@ const forgotPassword = async (req, res,next) => {
     }
     const resetToken = user.getResetPasswordToken();
     await user.save();
-    const resetUrl = `http://localhost:5173/password/${resetToken}`;
+    const resetUrl = `https://jazzy-tuts-mern.vercel.app/password/${resetToken}`;
     const message = `<h1>You have requested for a password reset </h1> <p>Please go to this link to reset your password</p> <a href=${resetUrl} clicktracking = off> ${resetUrl} </a> `;
     try {
       await sendEmail({

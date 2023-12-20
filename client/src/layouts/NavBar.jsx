@@ -19,7 +19,7 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
   const [authShow, setAuthShow] = useState(false);
   let getUser = async () => {
-    let response = await fetch('http://localhost:5750/api/user/getusername', {
+    let response = await fetch('https://jazzy-mern.onrender.com/api/user/getusername', {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

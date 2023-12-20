@@ -29,7 +29,7 @@ const SignUp = () => {
       verifypassword
     }
     try {
-      const data = await fetch('http://localhost:5750/api/user/registration',{
+      const data = await fetch('https://jazzy-mern.onrender.com/api/user/registration',{
         method:"POST",
         headers:{
           "Content-type": "application/json",

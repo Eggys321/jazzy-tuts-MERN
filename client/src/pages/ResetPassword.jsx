@@ -29,7 +29,7 @@ const ResetPassword = () => {
 
         }
           try {
-            const data = await fetch(`http://localhost:5750/api/user/resetpassword/${resetToken}`, { method:"PUT",
+            const data = await fetch(`https://jazzy-mern.onrender.com/api/user/resetpassword/${resetToken}`, { method:"PUT",
             headers:{
               "Content-type": "application/json",
             },

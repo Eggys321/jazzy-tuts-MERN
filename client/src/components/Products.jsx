@@ -18,7 +18,7 @@ import CartContext from "../context/CartContext";
 const Products = () => {
 
   const { data, loading, error } = useFetch(
-    "http://localhost:5750/api/products"
+    "https://jazzy-mern.onrender.com/api/products"
   );
   const {handleAddToCart,handleIncrease} = useContext(CartContext)
   console.log(data);

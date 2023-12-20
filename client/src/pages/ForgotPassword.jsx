@@ -22,7 +22,7 @@ const ForgotPassword = () => {
     };
     try {
       const data = await fetch(
-        "http://localhost:5750/api/user/forgotpassword",
+        "https://jazzy-mern.onrender.com/api/user/forgotpassword",
         {
           method: "POST",
           headers: {
