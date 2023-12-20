@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import useFetch from "../CustomHook/UseFetch";
+import useFetch from "../customHook/UseFetch.jsx";
 import jazzyPic from "../assets/image 4.jpg";
 import Loader from "../utils/Loader";
 import Button from "react-bootstrap/Button";
