@@ -5,6 +5,7 @@ import binPic from '../assets/bin-img.svg'
 
 const Bag = () => {
   const { cart, removeItem, totalPrice } = useContext(CartContext);
+  
   // localStorage.setItem()
   // const [receipient,setRecipient] = useState({
   //   lastname:"",
