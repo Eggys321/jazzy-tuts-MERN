@@ -11,7 +11,7 @@ import AuthContext from "../context/AuthContext.jsx";
 
 const CheckOut = () => {
   const [show, setShow] = useState(false);
-  const {shown,setShown} = useContext(AuthContext)
+  const {shown,setShown,loggedIn} = useContext(AuthContext)
   const [modalShow, setModalShow] = useState(false);
   const [modalAddress,setModalAddress] = useState(false)
   const { cart, removeItem, totalPrice, handleIncrease, handleDecrease } =
