@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [shown, setShown] = useState(false);
   const [loggedIn, setLoggedIn] = useState(undefined);
   const token = localStorage.getItem("token");
   async function getLoggedIn() {
@@ -22,6 +23,8 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(false);
   };
 
+  // show ftn for closing and opening the dropdown for bag
+
   useEffect(() => {
     getLoggedIn()
   },[]);
@@ -31,7 +34,9 @@ export const AuthProvider = ({ children }) => {
     loggedIn,
     getLoggedIn,
     logout,
-    setLoggedIn
+    setLoggedIn,
+    shown,
+    setShown
 
   }}>
     

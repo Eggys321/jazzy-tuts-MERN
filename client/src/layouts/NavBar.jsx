@@ -10,13 +10,16 @@ import { IoChevronDown } from "react-icons/io5";
 import { IoChevronUpOutline } from "react-icons/io5";
 import AuthDropdown from "../components/AuthDropdown";
 import CartContext from "../context/CartContext";
+import AuthContext from "../context/AuthContext";
+
 
 const NavBar = () => {
   const {cart,loggedIn} = useContext(CartContext)
+  const {shown,setShown} = useContext(AuthContext)
   const [user,setUser] = useState(null)
   const token = localStorage.getItem('token')
 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const [authShow, setAuthShow] = useState(false);
   let getUser = async () => {
     let response = await fetch('https://jazzy-mern.onrender.com/api/user/getusername', {
@@ -85,7 +88,7 @@ const NavBar = () => {
           </div>
           {/* <IoChevronUpOutline  className="d-none d-lg-block mt-2" /> */}
 
-          <div onClick={() => (!show ? setShow(true) : setShow(false))}>
+          <div onClick={() => (!shown ? setShown(true) : setShown(false))}>
             <div className="position-relative">
               <div className="bg-danger text-light position-absolute top-0 start-100 translate-middle rounded-pill h-75 p-1">
              <p className=""> {cart.length}</p>
@@ -96,7 +99,7 @@ const NavBar = () => {
           </div>
         </section>
       </nav>
-      <div className="position-absolute end-0 "> {show && <Cart />} </div>
+      <div className="position-absolute end-0 "> {shown && <Cart />} </div>
 
       <Outlet />
     </main>

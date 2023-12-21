@@ -15,7 +15,7 @@ const Bag = () => {
   // const [wk,setWk] = useState(0)
   return (
     <>
-      <main className="container p-2 shadow-lg bg-light">
+      <main className="container p-2 shadow-lg bg-light position-relative z-1">
         <div>
           <div className="container">
             {/* <p className="fw-bold fs-4">Your Order</p> */}

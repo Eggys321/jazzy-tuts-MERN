@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import CartContext from "../context/CartContext";
+import AuthContext from "../context/AuthContext";
 import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 
 const Order = () => {
   const { cart, totalPrice } = useContext(CartContext);
+  const {loggedIn} = useContext(AuthContext)
   const recipient = JSON.parse(localStorage.getItem("recipient"));
   const address = JSON.parse(localStorage.getItem("address"));
   const token = localStorage.getItem('token')
@@ -41,11 +43,14 @@ const Order = () => {
     if(res.success === false){
         toast.error(res.message)
         
+        
     }
   }
   useEffect(()=>{
-    if(!token){
+    if(!loggedIn){
+      toast.error('unauthorized,please login/signup')
         navigate('/Login')
+        
     }
   },[])
   return (

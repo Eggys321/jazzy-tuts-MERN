@@ -7,14 +7,23 @@ import binPic from "../assets/bin-img.svg";
 import MyVerticallyCenteredModal from "../components/ReciepientAuthModal.jsx";
 import ReciepientAddressModal from "../components/ReciepientAddressModal.jsx";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext.jsx";
 
 const CheckOut = () => {
   const [show, setShow] = useState(false);
+  const {shown,setShown} = useContext(AuthContext)
   const [modalShow, setModalShow] = useState(false);
   const [modalAddress,setModalAddress] = useState(false)
   const { cart, removeItem, totalPrice, handleIncrease, handleDecrease } =
     useContext(CartContext);
+
   console.log(cart);
+  function doSth(){
+    if(shown === true){
+      setShown(false)
+
+    }
+  }
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,7 +32,7 @@ const CheckOut = () => {
   });
   return (
     <>
-      <main className="my-5 container row justify-content-between">
+      <main className="my-5 container row justify-content-between" onMouseEnter={doSth}>
         <section className="col-lg-6 border border-3 rounded p-4 h-50">
           <h2>Review and place order </h2>
           <p className="mt-4">
