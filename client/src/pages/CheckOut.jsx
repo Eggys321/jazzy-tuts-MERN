@@ -8,6 +8,7 @@ import MyVerticallyCenteredModal from "../components/ReciepientAuthModal.jsx";
 import ReciepientAddressModal from "../components/ReciepientAddressModal.jsx";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
+import toast from "react-hot-toast";
 
 const CheckOut = () => {
   const [show, setShow] = useState(false);
@@ -16,6 +17,8 @@ const CheckOut = () => {
   const [modalAddress,setModalAddress] = useState(false)
   const { cart, removeItem, totalPrice, handleIncrease, handleDecrease } =
     useContext(CartContext);
+    const recipient = JSON.parse(localStorage.getItem("recipient"));
+  const address = JSON.parse(localStorage.getItem("address"));
 
   console.log(cart);
   function doSth(){
@@ -63,14 +66,18 @@ const CheckOut = () => {
             onHide={() => setModalAddress(false)}
             />
             <hr />
-            <Link className="btn btn-success w-100 text-decoration-none" to='/Order'> Place Your Order </Link>
+            {
+              recipient === null || address === null ?             <Link className="btn btn-success w-100 text-decoration-none" onClick={()=>toast.error('please fill address and reciepient details fess')}> Place Your Order </Link> :             <Link className="btn btn-success w-100 text-decoration-none" to='/Order'> Place Your Order </Link>
+
+
+            }
           </div>
         </section>
         <section className="col-lg-5 border border-3 rounded p-4">
           <h5>Your order from</h5>
           {cart.length === 0 && (
             <>
-              <h2>No items </h2>{" "}
+              <h2>No items </h2>
             </>
           )}
           <hr />
