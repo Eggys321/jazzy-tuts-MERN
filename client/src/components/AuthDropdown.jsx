@@ -10,9 +10,20 @@ const AuthDropdown = () => {
     <>
       <main className="container p-2 shadow-lg border rounded bg-light">
         <div className=" d-flex flex-column gap-3 m-3">
-          {loggedIn ? <>   <Link onClick={logout}  className="btn btn-primary text-light  fs-5 ">
+          {loggedIn ?
+           <>   
+           <Link onClick={logout}  className="btn btn-primary text-light  fs-5 ">
             Logout
-            </Link> </> : <>   <div className="d-flex bg-primary border rounded p-2 gap-3">
+            </Link> 
+           <Link to='/ClientOrder'  className="btn btn-primary text-light  fs-5 ">
+            Order
+            </Link> 
+            
+            </> 
+            
+            :
+            
+            <>   <div className="d-flex bg-primary border rounded p-2 gap-3">
               <img src={logInLogo} alt="log-in-logo" /> 
             <Link to='/LogIn' className="btn text-light  fs-5 ">
             Login
