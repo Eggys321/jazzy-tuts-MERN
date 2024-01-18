@@ -11,7 +11,7 @@ const auth = async(req,res,next)=>{
 
     try {
         const payload = jwt.verify(token, process.env.JWT_SECRETE);
-        req.user = {userId:payload.userId}
+        req.user = {userId:payload.userId, role: payload.role}
         next()
     } catch (error) {
         return res.status(401).json({message:"Auth Failed"})

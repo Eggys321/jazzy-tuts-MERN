@@ -2,11 +2,13 @@ const express = require('express');
 const { registration, login, getUserName, isLoggedIn, forgotPassword, resetPassword } = require('../controller/userController');
 const auth = require('../middleware/auth')
 const router = express.Router();
+const limiter = require('../middleware/loginAccountLimiter')
+
 
 // register route
 router.post('/registration',registration);
 // login route
-router.post('/login',login);
+router.post('/login',limiter,login);
 // getUserName route
 router.get('/getusername',auth,  getUserName);
 // isLoggedIn route

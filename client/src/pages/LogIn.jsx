@@ -22,7 +22,7 @@ const LogIn = () => {
       password,
     };
     try {
-      const data = await fetch('https://jazzy-mern.onrender.com/api/user/login',{
+      const data = await fetch('http://localhost:5750/api/user/login',{
         method:"POST",
         headers:{
           "Content-type": "application/json",
@@ -38,14 +38,19 @@ const LogIn = () => {
         toast.success(res.message)
         
       }
+      if(res.error === 'Account Suspended,Too many API requests from this IP, please try again after 2 mins'){
+
+        toast.error(res.error)
+      }
       if(res.user.token){
         localStorage.setItem('token', res.user.token)
-        // toast.success(data.msg)
         navigate('/')
         setLoggedIn(true)
       }
       
     } catch (error) {
+      console.log(error.message);
+     
       
     }
 
