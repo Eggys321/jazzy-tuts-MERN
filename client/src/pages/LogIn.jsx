@@ -22,7 +22,7 @@ const LogIn = () => {
       password,
     };
     try {
-      const data = await fetch('http://localhost:5750/api/user/login',{
+      const data = await fetch('https://jazzy-mern.onrender.com/api/user/login',{
         method:"POST",
         headers:{
           "Content-type": "application/json",
