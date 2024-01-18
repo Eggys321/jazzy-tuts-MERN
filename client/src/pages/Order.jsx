@@ -33,7 +33,7 @@ const Order = () => {
     console.log(res);
     if (res.success === true) {
       toast.success(res.message);
-      navigate("/");
+      navigate("/ClientOrder");
       localStorage.removeItem('recipient')
       localStorage.removeItem('address')
       setCart([])

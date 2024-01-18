@@ -23,7 +23,7 @@ const ClientOrderId = () => {
       }
     );
     const response = await fetcher.json();
-    console.log(response.orders[0].user.createdAt.slice(0, 10));
+    console.log(response.orders);
     // console.log(response);
     setClientOrder(response.orders);
   };
@@ -32,7 +32,7 @@ const ClientOrderId = () => {
   useEffect(() => {
     if (!loggedIn) {
       toast.error("unauthorized,please login/signup");
-      navigate("/Login");
+      navigate("/");
     }
 
     fetchClientOrder();
@@ -45,10 +45,13 @@ const ClientOrderId = () => {
             {clientOrder.map((itx) => {
               return (
                 <div key={itx._id} className="border">
-                  {/* <h2> {itx.user.createdAt.slice(0, 10)}</h2> */}
+                  {/* <h2> {itx.createdAt}</h2> */}
                   <p className="text-center">
-                    <span className="fw-bold">order Id</span> {itx._id}{" "}
+                    <span className="fw-bold">order Id</span> {itx._id}
                   </p>
+                  <h4> {itx.createdAt.slice(0,10)}, {itx.createdAt.slice(12,19)}</h4>
+                  {/* <h2> {itx.createdAt.slice(12,19)}</h2> */}
+
                   <hr />
                   <h2> {itx.address.city} </h2>
                   <h2> {itx.address.housenumber} </h2>
