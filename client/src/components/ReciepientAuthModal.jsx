@@ -76,13 +76,51 @@ const [recipient,setRecipient] = useState({
       </Modal.Header>
       <Modal.Body>
       <form>
-        <input type="text" name="firstname" placeholder="first name" value={recipient.firstname} onChange={handleChange} />
-        <input type="text" name="lastname" placeholder="last name" value={recipient.lastname} onChange={handleChange} />
-        <input type="email" required name="email" placeholder="email" value={recipient.email} onChange={handleChange} />
-        <input type="number" name="phonenumber" placeholder="phone" value={recipient.phonenumber} onChange={handleChange}/><br /><br />
-        <button onClick={handleSubmit} className="btn btn-primary">
-          submit
-        </button>
+      <div className="container-lg">
+        <div className="ink">
+          <div className="mb-3">
+            <label className="sand d-block" htmlFor="">
+              First Name
+            </label>
+            <input
+            className="form-control"
+             type="text" name="firstname" placeholder="first name" value={recipient.firstname} onChange={handleChange} />
+          </div>
+          <div className="mb-3">
+            <label className="sand d-block" htmlFor="">
+              Last Name
+            </label>
+            <input
+             className="form-control"
+            type="text" name="lastname" placeholder="last name" value={recipient.lastname} onChange={handleChange} />
+          </div>
+          <div className="mb-3">
+            <label className="sand d-block" htmlFor="">
+              Email
+            </label>
+            <input
+              className="form-control "
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@mail.com"
+              value={recipient.email} onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="sand d-block" htmlFor="">
+              Phone Number
+            </label>
+            <div className="d-flex num-inp">
+            <input 
+             className="form-control "
+            type="number" name="phonenumber" placeholder="phone" value={recipient.phonenumber} onChange={handleChange}/><br />
+            </div>
+          </div>
+        </div>
+        <button className="btn btn-primary sub text-white" onClick={handleSubmit}>Submit</button>
+      </div>
+
       </form>
       </Modal.Body>
       <Modal.Footer>
