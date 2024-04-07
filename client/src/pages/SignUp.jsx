@@ -1,58 +1,74 @@
 import React, { useEffect, useState } from "react";
 import jazzyLogo from "../assets/image 2.svg";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import toast from 'react-hot-toast';
-
-
+import toast from "react-hot-toast";
+import Spinner from "react-bootstrap/Spinner";
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
-  const [firstname, setFirstName] = useState('');
-  const [lastname,setLastName] = useState('');
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
-  const [verifypassword,setVerifyPassword] = useState('');
-  const [phonenumber,setPhoneNumber] = useState('');
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [verifypassword, setVerifyPassword] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
+  const [reveal, setReveal] = useState(false);
+  const [confirmReveal, setConfirmReveal] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handlSignUp = async(e)=>{
-    e.preventDefault()
+  const handlSignUp = async (e) => {
+    e.preventDefault();
     const signUpData = {
       firstname,
       lastname,
       email,
       phonenumber,
       password,
-      verifypassword
-    }
+      verifypassword,
+    };
+    setIsClicked(true);
+
     try {
-      const data = await fetch('https://jazzy-mern.onrender.com/api/user/registration',{
-        method:"POST",
-        headers:{
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(signUpData),
-      });
+      const data = await fetch(
+        "https://jazzy-mern.onrender.com/api/user/registration",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(signUpData),
+        }
+      );
       const res = await data.json();
       console.log(res);
-      if(res.success === false || res.name === "ValidationError"){
-        toast.error(res.message)
+      if (res.success === false || res.name === "ValidationError") {
+        toast.error(res.message);
       }
-      if(res.success === true){
-        toast.success(res.message)
-        navigate('/LogIn')
-
+      if (res.success === true) {
+        toast.success(res.message);
+        navigate("/LogIn");
       }
       // if(res.name === "ValidationError"){
       //   toast.error(res.message)
       // }
     } catch (error) {
-      toast.error
+      toast.error;
+    } finally {
+      setIsClicked(false);
     }
-  
+  };
+  const btnText = isClicked ? <Spinner animation="border" /> : "Create account";
+  function handleHide() {
+    !reveal ? setReveal(true) : setReveal(false);
+  }
+  function handleHideConfirm() {
+    !confirmReveal ? setConfirmReveal(true) : setConfirmReveal(false);
   }
   useEffect(() => {
     document.title = "Sign Up | Page";
@@ -70,9 +86,7 @@ const SignUp = () => {
             CREATE YOUR ACCOUNT
           </h2>
           <Form className="w-75 m-auto" onSubmit={handlSignUp}>
-            <Form.Label className=" fs-6 text-secondary">
-              First Name
-            </Form.Label>
+            <Form.Label className=" fs-6 text-secondary">First Name</Form.Label>
 
             <FloatingLabel
               controlId="floatingInput"
@@ -84,7 +98,7 @@ const SignUp = () => {
                 placeholder="First Name"
                 className="border border-3 rounded"
                 value={firstname}
-                onChange={(e)=>setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </FloatingLabel>
             <Form.Label className=" fs-6 text-secondary">Last Name </Form.Label>
@@ -99,7 +113,7 @@ const SignUp = () => {
                 placeholder="Last Name"
                 className="border border-3 rounded"
                 value={lastname}
-                onChange={(e)=>setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </FloatingLabel>
             {/* EMAIL */}
@@ -115,7 +129,7 @@ const SignUp = () => {
                 placeholder="name@example.com"
                 className="border border-3 rounded"
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </FloatingLabel>
             {/* Phone number */}
@@ -124,13 +138,18 @@ const SignUp = () => {
             </Form.Label>
 
             <InputGroup className="mb-3" size="lg">
-              <InputGroup.Text id="basic-addon1" className="bg-secondary fw-bold">+234</InputGroup.Text>
+              <InputGroup.Text
+                id="basic-addon1"
+                className="bg-secondary fw-bold"
+              >
+                +234
+              </InputGroup.Text>
               <Form.Control
                 placeholder=""
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 value={phonenumber}
-                onChange={(e)=>setPhoneNumber(e.target.value)}
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </InputGroup>
             {/* password */}
@@ -138,14 +157,24 @@ const SignUp = () => {
               Password (8 minimum characters)
             </Form.Label>
 
-            <FloatingLabel controlId="floatingPassword" label="Password">
+            <FloatingLabel
+              controlId="floatingPassword"
+              label="Password"
+            >
               <Form.Control
-                type="password"
+                type={reveal ? "text" : "password"}
                 placeholder="Password"
-                className="border border-3 rounded my-3"
+                className="border border-3 rounded my-3 position-relative"
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
+              <p
+                className="position-absolute end-0 top-0 mt-3 me-2"
+                role="button"
+                onClick={handleHide}
+              >
+                {reveal ? <FaRegEyeSlash /> : <FaRegEye />}
+              </p>
             </FloatingLabel>
             {/* confirm */}
             <Form.Label className=" fs-6 text-secondary">
@@ -154,29 +183,47 @@ const SignUp = () => {
 
             <FloatingLabel controlId="floatingPassword" label="Password">
               <Form.Control
-                type="password"
+                type={confirmReveal ? "text" : "password"}
                 placeholder="Password"
-                className="border border-3 rounded mb-3"
+                className="border border-3 rounded mb-3 position-relative"
                 value={verifypassword}
-                onChange={(e)=>setVerifyPassword(e.target.value)}
+                onChange={(e) => setVerifyPassword(e.target.value)}
               />
+               <p
+                className="position-absolute end-0 top-0 mt-3 me-2"
+                role="button"
+                onClick={handleHideConfirm}
+              >
+                {confirmReveal ? <FaRegEyeSlash /> : <FaRegEye />}
+              </p>
             </FloatingLabel>
             <div>
-                {["checkbox"].map((type) => (
+              {["checkbox"].map((type) => (
                 <div key={`default-${type}`} className="mb-3">
                   <Form.Check // prettier-ignore
                     type={type}
                     id={`default-${type}`}
-                    label={'Keep me signed in'}
+                    label={"Keep me signed in"}
                     className="fs-6 fw-bold"
                   />
                 </div>
               ))}
             </div>
-            <button className="btn btn-danger w-100 fs-3">Create account</button>
-            <p className="text-center mt-3 fw-bold">Have an account?  <Link className="text-decoration-none" to='/Login'>Sign In</Link></p>
+            <button className="btn btn-danger w-100 fs-3" disabled={isClicked}>
+              {btnText}
+            </button>
+            <p className="text-center mt-3 fw-bold">
+              Have an account?{" "}
+              <Link className="text-decoration-none" to="/Login">
+                Sign In
+              </Link>
+            </p>
 
-          <p className="text-center fw-bold ">By Creating your Quickmunch account, you agree to the  <Link to='#'>Terms of use</Link> and <Link to='#'> Privacy Policy</Link></p>
+            <p className="text-center fw-bold ">
+              By Creating your Quickmunch account, you agree to the{" "}
+              <Link to="#">Terms of use</Link> and{" "}
+              <Link to="#"> Privacy Policy</Link>
+            </p>
           </Form>
         </div>
       </main>

@@ -1,63 +1,75 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import jazzyLogo from "../assets/image 2.svg";
-import { Link,useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import AuthContext from "../context/AuthContext";
-
-
+import Spinner from "react-bootstrap/Spinner";
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const LogIn = () => {
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [reveal, setReveal] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const { setLoggedIn } = useContext(AuthContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleLogin = async(e)=>{
-    e.preventDefault()
+  const handleLogin = async (e) => {
+    e.preventDefault();
     const logInData = {
       email,
       password,
     };
+    setIsClicked(true);
+
     try {
-      const data = await fetch('https://jazzy-mern.onrender.com/api/user/login',{
-        method:"POST",
-        headers:{
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(logInData),
-      });
+      const data = await fetch(
+        "https://jazzy-mern.onrender.com/api/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(logInData),
+        }
+      );
       const res = await data.json();
       console.log(res);
-      if(res.success === false || res.name === "ValidationError"){
-        toast.error(res.message)
+      if (res.success === false || res.name === "ValidationError") {
+        toast.error(res.message);
       }
-      if(res.success === true){
-        toast.success(res.message)
-        
+      if (res.success === true) {
+        toast.success(res.message);
       }
-      if(res.error === 'Account Suspended,Too many API requests from this IP, please try again after 2 mins'){
-
-        toast.error(res.error)
+      if (
+        res.error ===
+        "Account Suspended,Too many API requests from this IP, please try again after 2 mins"
+      ) {
+        toast.error(res.error);
       }
-      if(res.user.token){
-        localStorage.setItem('token', res.user.token)
-        navigate('/')
-        setLoggedIn(true)
+      if (res.user.token) {
+        localStorage.setItem("token", res.user.token);
+        navigate("/");
+        setLoggedIn(true);
       }
-      
     } catch (error) {
       console.log(error.message);
-     
-      
+    } finally {
+      setIsClicked(false);
     }
+  };
 
+  const btnText = isClicked ? <Spinner animation="border" /> : "Sign In";
+  function handleHide() {
+    !reveal ? setReveal(true) : setReveal(false);
   }
-  useEffect(()=>{
-    document.title = 'Log In | Page'
-  })
+  useEffect(() => {
+    document.title = "Log In | Page";
+  });
 
   return (
     <>
@@ -85,19 +97,27 @@ const LogIn = () => {
                 placeholder="name@example.com"
                 className="border border-3 rounded"
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </FloatingLabel>
+            {/* password */}
             <Form.Label className=" fs-6 text-secondary">Password </Form.Label>
 
             <FloatingLabel controlId="floatingPassword" label="Password">
               <Form.Control
-                type="password"
+                type={reveal ? "text" : "password"}
                 placeholder="Password"
-                className="border border-3 rounded"
+                className="border border-3 rounded position-relative"
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
+              <p
+                className="position-absolute end-0 top-0 mt-3 me-2"
+                role="button"
+                onClick={handleHide}
+              >
+                {reveal ? <FaRegEyeSlash /> : <FaRegEye />}
+              </p>
             </FloatingLabel>
             <Form className="mt-3 d-flex justify-content-between">
               {["checkbox"].map((type) => (
@@ -105,15 +125,28 @@ const LogIn = () => {
                   <Form.Check // prettier-ignore
                     type={type}
                     id={`default-${type}`}
-                    label={'Keep me signed in'}
+                    label={"Keep me signed in"}
                     className="fs-6 fw-bold"
                   />
                 </div>
               ))}
-              <Link className="text-decoration-none" to='/forgot-password'> Reset Password </Link>
+              <Link className="text-decoration-none" to="/forgot-password">
+                Reset Password
+              </Link>
             </Form>
-            <button className="btn btn-danger w-100 fs-3" onClick={handleLogin}>Sign In</button>
-            <p className="text-center mt-3 fw-bold">Dont have an account? <Link className="text-decoration-none" to='/SignUp'>Create one</Link></p>
+            <button
+              className="btn btn-danger w-100 fs-3"
+              onClick={handleLogin}
+              disabled={isClicked}
+            >
+              {btnText}
+            </button>
+            <p className="text-center mt-3 fw-bold">
+              Dont have an account?
+              <Link className="text-decoration-none" to="/SignUp">
+                Create one
+              </Link>
+            </p>
           </Form>
         </div>
       </main>
