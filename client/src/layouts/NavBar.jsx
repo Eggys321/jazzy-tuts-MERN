@@ -90,7 +90,7 @@ const NavBar = () => {
 
           <div onClick={() => (!shown ? setShown(true) : setShown(false))}>
             <div className="position-relative">
-              <div className="bg-danger text-light position-absolute top-0 start-100 translate-middle rounded-pill h-75 p-1">
+              <div className="position-absolute top-0 start-100 translate-middle bg-danger text-light rounded-circle w-75 text-center h-75  fw-bold">
              <p className=""> {cart.length}</p>
               </div>
               
