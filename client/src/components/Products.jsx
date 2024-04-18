@@ -31,11 +31,14 @@ const Products = () => {
   return (
     <>
       <main className="my-5 row">
+      {loading ? <div className="text-center"> <Loader />  </div>: (
+        <>
+
       <div className="d-none d-lg-block col-lg-3 ">
         <img src={jazzyPic} alt="jazzys pic" className="w-100 h-100" />
       </div>
+
       <div className="col-sm-12 col-lg-9">
-      {loading ? <Loader /> : (
         
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
           {data.map((datum) => {
@@ -80,9 +83,11 @@ const Products = () => {
             );
           })}
         </div>
-      ) }
 
       </div>
+        </>
+      ) }
+
     </main>
     </>
   );
