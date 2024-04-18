@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Order from "./pages/Order";
 import ClientOrder from "./pages/ClientOrder";
 import ClientOrderId from "./pages/ClientOrderId";
+import Footer from "./layouts/Footer";
 
 // const NavBar = lazy(() => import('./layouts/NavBar'))
 const NavBar= lazy(()=>{
@@ -43,7 +44,7 @@ function App() {
       <Suspense fallback={<Load />}>
         <BrowserRouter>
           <Routes>
-            <Route element={<NavBar />}>
+            <Route element={<><NavBar /> <Footer/></>}>
               <Route path="/" element={<Home />} />
               <Route path="/CheckOut" element={<CheckOut/>}/>
               <Route path="/Order" element={<Order/>}/>
