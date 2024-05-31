@@ -7,8 +7,8 @@ import googleImg from '../assets/google image.svg'
 const Footer = () => {
   return (
     <>
-      <footer className="bg-black">
-        <main className="text-white container py-5 text-center">
+      <footer className="bg-black container p-5">
+        <main className="text-white   text-center">
           {/* section-1 */}
           <section className="d-lg-flex justify-content-between ">
               {/* parent div */}

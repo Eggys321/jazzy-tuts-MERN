@@ -3,7 +3,7 @@ const {createTransport} = require('nodemailer');
 const sendEmail = (options)=>{
     const transporter = createTransport({
         host:process.env.EMAIL_SERVICE,
-        port:2525,
+        port:587,
         secure:false,
         auth:{
             user:process.env.EMAIL_USERNAME,
