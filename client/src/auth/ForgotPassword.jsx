@@ -33,7 +33,7 @@ const ForgotPassword = () => {
       );
       const response = await data.json();
       // setSuccess(data.data)
-      console.log(response);
+      // console.log(response);
       if (response.success === true) {
         toast.success(response.data);
       }
@@ -46,7 +46,7 @@ const ForgotPassword = () => {
         setError("");
       }, 5000);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   useEffect(() => {

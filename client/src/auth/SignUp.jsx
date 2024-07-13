@@ -46,7 +46,7 @@ const SignUp = () => {
         }
       );
       const res = await data.json();
-      console.log(res);
+      // console.log(res);
       if (res.success === false || res.name === "ValidationError") {
         toast.error(res.message);
       }

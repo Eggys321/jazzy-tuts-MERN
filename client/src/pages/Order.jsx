@@ -30,7 +30,7 @@ const Order = () => {
       body: JSON.stringify(orderFtn),
     });
     const res = await fetcher.json();
-    console.log(res);
+    // console.log(res);
     if (res.success === true) {
       toast.success(res.message);
       navigate("/ClientOrder");

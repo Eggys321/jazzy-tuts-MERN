@@ -38,7 +38,7 @@ const LogIn = () => {
         }
       );
       const res = await data.json();
-      console.log(res);
+      // console.log(res);
       if (res.success === false || res.name === "ValidationError") {
         toast.error(res.message);
       }
@@ -57,7 +57,7 @@ const LogIn = () => {
         setLoggedIn(true);
       }
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     } finally {
       setIsClicked(false);
     }

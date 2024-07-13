@@ -13,7 +13,7 @@ const useFetch = (url) => {
       setData(fetchResponse.products);
     //   console.log(fetchResponse.products);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       setError(error)
     } finally {
       setIsLoading(false);

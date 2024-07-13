@@ -1,0 +1,25 @@
+.qty-div{
+    background: rgba(225, 186, 186, 0.75);
+    height: 3rem;
+    
+}
+
+.dec-btn , .inc-btn{
+    background: rgba(255, 255, 255, 0.63);
+    color: rgba(243, 29, 29, 1);
+    /* height: 3rem; */
+    
+}
+
+.price-bin-div{
+    padding-top: 50px;
+}
+
+@media(min-width:769px){
+    .qty-div{
+        width: 160px;
+    }
+    .price-bin-div{
+        padding-top: 25px;
+    }
+}

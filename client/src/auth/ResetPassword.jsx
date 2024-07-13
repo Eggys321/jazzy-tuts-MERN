@@ -36,7 +36,7 @@ const ResetPassword = () => {
             body: JSON.stringify(logInData)});
             const response = await data.json()
             // setSuccess(data.data)
-            console.log(response);
+            // console.log(response);
          
             if(response.success === true){
               toast.success(response.message)
@@ -49,7 +49,7 @@ const ResetPassword = () => {
             }
            
           } catch (error) {
-            console.log(error);
+            // console.log(error);
             
           }
 

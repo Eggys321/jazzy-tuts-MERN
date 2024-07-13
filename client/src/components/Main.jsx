@@ -23,11 +23,11 @@ const Main = () => {
     try {
       const fetchedData = await fetch(dataUrl);
       const response = await fetchedData.json();
-      console.log(response);
+      // console.log(response);
       setData(response);
       setIsLoading(false)
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   // console.log(data);

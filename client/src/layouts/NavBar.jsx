@@ -32,7 +32,7 @@ const NavBar = () => {
 
     let data = await response.json();
     setUser(data.firstname);
-    console.log(data.firstname);
+    // console.log(data.firstname);
   };
   useEffect(()=>{
     getUser()

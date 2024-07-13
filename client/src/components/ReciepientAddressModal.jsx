@@ -45,7 +45,7 @@ function ReciepientAddressModal(props) {
     ) {
       setAddress({ city: "", housenumber: "", street: "" });
       localStorage.setItem("address", JSON.stringify(address));
-      console.log(address);
+      // console.log(address);
       toast.success("address added successfully");
     }
     try {

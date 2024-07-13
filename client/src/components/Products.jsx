@@ -13,25 +13,36 @@ import eggImg from '../assets/image 9.jpg';
 import '../styles/Product.css';
 import { ToastContainer, toast } from "react-toastify";
 import CartContext from "../context/CartContext";
+import { useQuery } from "@tanstack/react-query";
+import useData from "../customHook/useData.js";
+
+
 
 
 const Products = () => {
-
-  const { data, loading, error } = useFetch(
-    "https://jazzy-mern.onrender.com/api/products"
-  );
-  const {handleAddToCart,handleIncrease} = useContext(CartContext)
-  console.log(data);
-  //   console.log(error);
+  const { data, error, isLoading } = useData();
+  // const { data, loading, error } = useFetch(
+  //   "https://jazzy-mern.onrender.com/api/products"
+  // );
+  const {handleAddToCart} = useContext(CartContext)
+ 
   const notify = () => {
     toast("An item has been added",{
       position:toast.POSITION.TOP_CENTER
     });
   };
+// from react-query
+  if (isLoading) {
+    return <div className="text-center"><Loader /></div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <>
       <main className="my-5 row">
-      {loading ? <div className="text-center"> <Loader />  </div>: (
+      {isLoading ? <div className="text-center"> <Loader />  </div>: (
         <>
 
       <div className="d-none d-lg-block col-lg-3 ">

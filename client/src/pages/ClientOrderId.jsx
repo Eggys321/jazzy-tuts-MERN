@@ -23,7 +23,7 @@ const ClientOrderId = () => {
       }
     );
     const response = await fetcher.json();
-    console.log(response.orders);
+    // console.log(response.orders);
     // console.log(response);
     setClientOrder(response.orders);
   };

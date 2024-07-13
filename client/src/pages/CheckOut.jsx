@@ -9,6 +9,7 @@ import ReciepientAddressModal from "../components/ReciepientAddressModal.jsx";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
 import toast from "react-hot-toast";
+import "../styles/CheckOut.css"
 
 const CheckOut = () => {
   const [show, setShow] = useState(false);
@@ -20,7 +21,7 @@ const CheckOut = () => {
     const recipient = JSON.parse(localStorage.getItem("recipient"));
   const address = JSON.parse(localStorage.getItem("address"));
 
-  console.log(cart);
+  // console.log(cart);
   function doSth(){
     if(shown === true){
       setShown(false)
@@ -35,16 +36,16 @@ const CheckOut = () => {
   });
   return (
     <>
-      <main className="my-5 container row justify-content-between" onMouseEnter={doSth}>
-        <section className="col-lg-6 border border-3 rounded p-4 h-50">
-          <h2>Review and place order </h2>
+      <main className="my-5 container row justify-content-between gap-5" onMouseEnter={doSth}>
+        <section className="col-lg-6 shadow rounded p-4 h-50">
+          <h2 className="fw-bold">Review and place order </h2>
           <p className="mt-4">
             Review / Add address and fulfill payments to complete your purchase
           </p>
           <hr />
           <div>
             <h5>Recipient information</h5>
-            <Button variant="" className="bg-dark outline-none text-light w-50" onClick={() => setModalShow(true)}>
+            <Button variant="" className="bg-dark outline-none text-light w-75" onClick={() => setModalShow(true)}>
             Add Recipient
             </Button>
 
@@ -57,7 +58,7 @@ const CheckOut = () => {
           {/* Delivery Address */}
           <div>
             <h5>Delivery Address</h5>
-            <Button variant="" className="bg-dark outline-none text-light w-50" onClick={() => setModalAddress(true)}>
+            <Button variant="" className="bg-dark outline-none text-light w-75" onClick={() => setModalAddress(true)}>
             Add Delivery Address
             </Button>
 
@@ -73,8 +74,8 @@ const CheckOut = () => {
             }
           </div>
         </section>
-        <section className="col-lg-5 border border-3 rounded p-4">
-          <h5>Your order from</h5>
+        <section className="col-lg-5  shadow rounded p-4">
+          {cart.length === 0 ? "" : <h5 className="fw-bold">Your order from</h5>}
           {cart.length === 0 && (
             <>
               <h2>No items </h2>
@@ -85,50 +86,50 @@ const CheckOut = () => {
             const { quantity, title, price, _id } = cartItem;
             return (
               <div
-                className="row justify-content-between align-items-center "
+                className="row justify-content-between align-items-center border-bottom "
                 key={_id}
               >
                 {/* <hr /> */}
 
-                <div className="col-5 ">
-                  <h2 className="fs-6 text-danger"> {title}... </h2>
-                  <p className=""> </p>
-                  <div className="bg-secondary w-75 ">
+                <div className="col-7 ">
+                  <p className="text-danger fw-bolder mt-2"> {title} </p>
+                  <div className="p-2 rounded mb-3 qty-div  fs-4 d-flex justify-content-between align-items-center">
                     <button
-                      className="btn btn-lg"
-                      onClick={() => handleIncrease(cartItem)}
-                    >
-                      +
-                    </button>
-                    {quantity}
-                    <button
-                      className="btn btn-lg"
+                      className="btn  dec-btn  fs-5"
                       onClick={() => handleDecrease(cartItem)}
                     >
                       -
                     </button>
+                    <span className=""> {quantity} </span>
+                    <button
+                      className="btn inc-btn fs-5"
+                      onClick={() => handleIncrease(cartItem)}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
-                <p className="col-4">
-                  <div className="d-flex gap-3">
+                <div className="col-4 ">
+                  <div className="d-flex price-bin-div gap-3">
                     <span role="button" onClick={() => removeItem(_id)}>
                       <img src={binPic} alt="" />
                     </span>
+                    <p>  </p>
                     {price}
                   </div>
-                </p>
+                </div>
                 {/* <div className=''>
                         </div> */}
               </div>
             );
           })}
-          <div>
+          <div className="pt-5 fw-bold fs-4">
             {totalPrice === 0 ? (
               ""
             ) : (
               <div className="d-flex justify-content-between">
-                <p> Items Subtotal </p>
-                <p># {totalPrice} </p>
+                <p className=""> Total: </p>
+                <p className=""># {totalPrice} </p>
                 {/* <div>
                 </div> */}
               </div>
